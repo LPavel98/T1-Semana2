@@ -11,9 +11,9 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer sr;
     Animator animator;
     const int ANIMATION_QUIETO = 0;
-    const int ANIMATION_CORRER = 1;
+    const int ANIMATION_CORRER = 2;
 
-    const int ANIMATION_CAMINAR = 2;
+    const int ANIMATION_CAMINAR = 1;
     const int ANIMATION_ATACAR = 3;
     const int ANIMATION_Saltar = 4;
     bool puedeSaltar = true;
@@ -33,24 +33,24 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.X)){
             rb.velocity = new Vector2(-20, rb.velocity.y);
             sr.flipX = true;
-            ChangeAnimation(ANIMATION_CAMINAR);
+            ChangeAnimation(ANIMATION_CORRER);
         }
 
         else if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.X)){
             rb.velocity = new Vector2(20, rb.velocity.y);
             sr.flipX = false;
-            ChangeAnimation(ANIMATION_CAMINAR);
+            ChangeAnimation(ANIMATION_CORRER);
         }
 
         else if (Input.GetKey(KeyCode.RightArrow)){
             rb.velocity = new Vector2(velocity, rb.velocity.y);  
             sr.flipX = false;
-            ChangeAnimation(ANIMATION_CORRER);
+            ChangeAnimation(ANIMATION_CAMINAR);
         }
         else if (Input.GetKey(KeyCode.LeftArrow)){
             rb.velocity = new Vector2(-velocity, rb.velocity.y);
             sr.flipX = true;
-            ChangeAnimation(ANIMATION_CORRER);
+            ChangeAnimation(ANIMATION_CAMINAR);
         }
 
         else if (Input.GetKey(KeyCode.Z)){
@@ -67,6 +67,13 @@ public class PlayerController : MonoBehaviour
             puedeSaltar = false;
             ChangeAnimation(ANIMATION_Saltar);
         }
+
+        
+
+        
+
+
+        
         else
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
