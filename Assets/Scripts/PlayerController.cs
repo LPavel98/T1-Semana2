@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     const int ANIMATION_QUIETO = 0;
     const int ANIMATION_CORRER = 1;
 
+    const int ANIMATION_CAMINAR = 2;
+    const int ANIMATION_ATACAR = 3;
+    const int ANIMATION_Saltar = 4;
     bool puedeSaltar = true;
     // Start is called before the first frame update
     void Start()
@@ -27,7 +30,19 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Debug.Log("Puede saltar"+puedeSaltar.ToString());
-        if (Input.GetKey(KeyCode.RightArrow)){
+        if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.X)){
+            rb.velocity = new Vector2(-20, rb.velocity.y);
+            sr.flipX = true;
+            ChangeAnimation(ANIMATION_CAMINAR);
+        }
+
+        else if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.X)){
+            rb.velocity = new Vector2(20, rb.velocity.y);
+            sr.flipX = false;
+            ChangeAnimation(ANIMATION_CAMINAR);
+        }
+
+        else if (Input.GetKey(KeyCode.RightArrow)){
             rb.velocity = new Vector2(velocity, rb.velocity.y);  
             sr.flipX = false;
             ChangeAnimation(ANIMATION_CORRER);
@@ -38,10 +53,19 @@ public class PlayerController : MonoBehaviour
             ChangeAnimation(ANIMATION_CORRER);
         }
 
+        else if (Input.GetKey(KeyCode.Z)){
+            // rb.velocity = new Vector2(-velocity, rb.velocity.y);
+            // sr.flipX = true;
+            ChangeAnimation(ANIMATION_ATACAR);
+        }
+
+        
+
         else if (Input.GetKeyUp(KeyCode.Space) && puedeSaltar)
         {
             rb.AddForce(new Vector2(0,JumpForce), ForceMode2D.Impulse);
             puedeSaltar = false;
+            ChangeAnimation(ANIMATION_Saltar);
         }
         else
         {
