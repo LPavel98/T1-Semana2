@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     const int ANIMATION_ATACAR = 3;
     const int ANIMATION_Saltar = 4;
     bool puedeSaltar = true;
+
+    private Vector3 lastCheckpointPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +68,7 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(new Vector2(0,JumpForce), ForceMode2D.Impulse);
             puedeSaltar = false;
             ChangeAnimation(ANIMATION_Saltar);
+            
         }
 
         
@@ -83,7 +86,22 @@ public class PlayerController : MonoBehaviour
             if (other.gameObject.tag == "Enemy")
             {
                 Debug.Log("Estas muerto");
-            }   
+            } 
+            if (other.gameObject.name == "DarkHole")
+            {
+                if (lastCheckpointPosition != null)
+                {
+                    transform.position = lastCheckpointPosition;
+                    
+                }
+                
+            }
+      
+            
+    }
+    private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("trigger");
+        lastCheckpointPosition = transform.position;
     }
    
 
