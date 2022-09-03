@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public float JumpForce = 5;
 
     public float velocity = 10;
+    public int Saltos;
     Rigidbody2D rb; 
     SpriteRenderer sr;
     Animator animator;
@@ -18,6 +19,9 @@ public class PlayerController : MonoBehaviour
     const int ANIMATION_Saltar = 4;
     bool puedeSaltar = true;
 
+    private int saltosHechos;
+    public int limiteSaltos;
+
     private Vector3 lastCheckpointPosition;
     // Start is called before the first frame update
     void Start()
@@ -26,12 +30,16 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        // Saltos = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+         
         Debug.Log("Puede saltar"+puedeSaltar.ToString());
+         puedeSaltar = true;
         if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.X)){
             rb.velocity = new Vector2(-20, rb.velocity.y);
             sr.flipX = true;
@@ -61,15 +69,30 @@ public class PlayerController : MonoBehaviour
             ChangeAnimation(ANIMATION_ATACAR);
         }
 
-        
+    
 
-        else if (Input.GetKeyUp(KeyCode.Space) && puedeSaltar)
-        {
-            rb.AddForce(new Vector2(0,JumpForce), ForceMode2D.Impulse);
-            puedeSaltar = false;
-            ChangeAnimation(ANIMATION_Saltar);
+        else if(Input.GetKeyUp(KeyCode.Space)){
+            if(saltosHechos<limiteSaltos){
+
+                rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+                
+                saltosHechos++;
+                ChangeAnimation(ANIMATION_Saltar);
+                
+            }
             
         }
+
+       
+
+        // else if (Input.GetKeyDown(KeyCode.Space) && puedeSaltar == false && Saltos < 2)
+        //     {
+        //         Saltos++;
+        //         Jump();
+        //         puedeSaltar = false;
+        //         ChangeAnimation(ANIMATION_Saltar);
+                
+        //     }
 
         
         else
@@ -96,6 +119,12 @@ public class PlayerController : MonoBehaviour
                 }
                 
             }
+
+            if(other.collider.tag=="Tilemap"){
+            saltosHechos = 0;  
+        }
+
+          
       
             
     }
@@ -109,4 +138,15 @@ public class PlayerController : MonoBehaviour
         animator.SetInteger("Estado", animation);
 
     }
+
+    //  private void Jump(){
+        
+    //     rb.AddForce(new Vector2(0,JumpForce), ForceMode2D.Impulse);
+
+    //  }
+    // void OnCollisionEnter2D(Collision2D objeto){
+        
+    // }
+
+  
 }
