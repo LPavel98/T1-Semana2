@@ -6,3 +6,4 @@ jump 	4
 slide 	5
 dead 	6
 hurt	7
+fall 	8
