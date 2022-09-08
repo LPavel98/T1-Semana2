@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - Tilemap
   - Caballero
+  - DarkHole
+  - Enemy
   layers:
   - Default
   - TransparentFX

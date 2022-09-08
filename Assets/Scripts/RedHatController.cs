@@ -5,7 +5,7 @@ using UnityEngine;
 public class RedHatController : MonoBehaviour
 {
     // Start is called before the first frame update
-public float JumpForce = 20;
+    public float JumpForce = 20;
 
     public float velocity = 10;
     public int Saltos;

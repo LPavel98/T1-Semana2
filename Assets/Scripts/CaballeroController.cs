@@ -105,7 +105,7 @@ public class CaballeroController : MonoBehaviour
             {
                 Debug.Log("Estas muerto");
             } 
-            if (other.gameObject.name == "DarkHole")
+            if (other.gameObject.tag == "DarkHole")
             {
                 if (lastCheckpointPosition != null)
                 {
