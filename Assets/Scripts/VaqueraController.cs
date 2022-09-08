@@ -15,6 +15,7 @@ public class VaqueraController : MonoBehaviour
     Rigidbody2D rb; 
     SpriteRenderer sr;
     Animator animator;
+
     const int ANIMATION_QUIETO = 0;
    
     const int ANIMATION_CORRER = 2;
@@ -31,6 +32,7 @@ public class VaqueraController : MonoBehaviour
 
     private Vector3 lastCheckpointPosition;
    
+
     void Start()
     {
         Debug.Log("Iniciamos script de player");
@@ -38,6 +40,7 @@ public class VaqueraController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -45,33 +48,43 @@ public class VaqueraController : MonoBehaviour
     {
          Debug.Log("Puede saltar"+puedeSaltar.ToString());
          puedeSaltar = true;
+
+        rb.velocity = new Vector2(5, rb.velocity.y);
+        sr.flipX = false;
+        ChangeAnimation(ANIMATION_CORRER);
          //bullet
          if (Input.GetKeyUp(KeyCode.G) && sr.flipX == true)
         {
-            var bulletPosition = transform.position + new Vector3(-1,0,0);
-            var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
-            var controller = gb.GetComponent<BulletController>();
-            controller.SetLeftDirection();
+            
+                
+                var bulletPosition = transform.position + new Vector3(-2,0,0);
+                var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
+                var controller = gb.GetComponent<BulletController>();
+                controller.SetLeftDirection();
+        
+           
             
         }
         else if (Input.GetKeyUp(KeyCode.G) && sr.flipX == false)
         {
-            var bulletPosition = transform.position + new Vector3(1,0,0);
-            var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
-            var controller = gb.GetComponent<BulletController>();
-            controller.SetRightDirection();
+            
+                var bulletPosition = transform.position + new Vector3(1,0,0);
+                var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
+                var controller = gb.GetComponent<BulletController>();
+                controller.SetRightDirection();  
+ 
            
         }
 
         //CORRER
         else if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.X)){
-            rb.velocity = new Vector2(-20, rb.velocity.y);
+            rb.velocity = new Vector2(-10, rb.velocity.y);
             sr.flipX = true;
             ChangeAnimation(ANIMATION_CORRER);
         }
 
         else if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.X)){
-            rb.velocity = new Vector2(20, rb.velocity.y);
+            rb.velocity = new Vector2(10, rb.velocity.y);
             sr.flipX = false;
             ChangeAnimation(ANIMATION_CORRER);
         }
@@ -123,15 +136,16 @@ public class VaqueraController : MonoBehaviour
 
         else if (gameManager.livesText.text == "GAME OVER")
                 {
+                    rb.velocity = new Vector2(0, rb.velocity.y);
                     ChangeAnimation(ANIMATION_DEAD);
-                    Debug.Log("Estas muerto");
+                    
                 }
 
         //QUIETO
         else
         {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-            ChangeAnimation(ANIMATION_QUIETO);
+            // rb.velocity = new Vector2(0, rb.velocity.y);
+            // ChangeAnimation(ANIMATION_QUIETO);
         }
     }
    

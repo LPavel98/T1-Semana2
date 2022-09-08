@@ -15,6 +15,7 @@ public class BulletController : MonoBehaviour
    
     public void SetRightDirection(){
         realVelocity = velocity;
+        
     }
      public void SetLeftDirection(){
         realVelocity = -velocity;
@@ -30,7 +31,9 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = new Vector2(realVelocity, 0);
+            rb.velocity = new Vector2(realVelocity, 0);
+ 
+        
     }
 
     void OnCollisionEnter2D(Collision2D other) {

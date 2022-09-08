@@ -36,7 +36,7 @@ public class BalaEnemyController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) {
             Destroy(this.gameObject); 
-            if (other.gameObject.name == "Vaquera")
+            if (other.gameObject.name == "Caballero")
             {
                 gameManager.PerderVida();
                 //Destroy(other.gameObject);

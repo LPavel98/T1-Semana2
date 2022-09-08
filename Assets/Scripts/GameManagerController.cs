@@ -36,9 +36,9 @@ public class GameManagerController : MonoBehaviour
     public void PerderVida(){
         lives -= 1;
         PrintLivesInScreen();
-        if (lives == 0)
+        if (lives == 2)
         {
-            Debug.Log("Se quedo´sin vids");
+            
             livesText.text = "GAME OVER";
             
            
@@ -52,6 +52,6 @@ public class GameManagerController : MonoBehaviour
 
     
     private void PrintLivesInScreen(){
-        livesText.text = "Visa: " + lives;
+        livesText.text = "Vida: " + lives;
     }
 }

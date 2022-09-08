@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class CaballeroController : MonoBehaviour
 {
+    private GameManagerController gameManager;
+    public GameObject bullet;
+
     public float JumpForce = 20;
 
     public float velocity = 10;
@@ -26,6 +29,7 @@ public class CaballeroController : MonoBehaviour
     void Start()
     {
         Debug.Log("Iniciamos script de player");
+        gameManager = FindObjectOfType<GameManagerController>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
@@ -37,9 +41,25 @@ public class CaballeroController : MonoBehaviour
          
         Debug.Log("Puede saltar"+puedeSaltar.ToString());
          puedeSaltar = true;
+         if (Input.GetKeyUp(KeyCode.G) && sr.flipX == true)
+        {
+            var bulletPosition = transform.position + new Vector3(-1,0,0);
+            var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
+            var controller = gb.GetComponent<BulletController>();
+            controller.SetLeftDirection();
+            
+        }
+        else if (Input.GetKeyUp(KeyCode.G) && sr.flipX == false)
+        {
+            var bulletPosition = transform.position + new Vector3(1,0,0);
+            var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
+            var controller = gb.GetComponent<BulletController>();
+            controller.SetRightDirection();
+           
+        }
 
          //CORRER
-        if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.X)){
+        else if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.X)){
             rb.velocity = new Vector2(-20, rb.velocity.y);
             sr.flipX = true;
             ChangeAnimation(ANIMATION_CORRER);
@@ -89,6 +109,12 @@ public class CaballeroController : MonoBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y);
             ChangeAnimation(ANIMATION_DEAD);
         }
+
+        else if (gameManager.livesText.text == "GAME OVER")
+                {
+                    ChangeAnimation(ANIMATION_DEAD);
+                    Debug.Log("Estas muerto");
+                }
         //QUIETO
         else
         {
@@ -101,10 +127,16 @@ public class CaballeroController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other) {
         Debug.Log("Puede saltar");
         puedeSaltar = true;
-            if (other.gameObject.tag == "Enemy")
+
+        if (other.gameObject.tag == "Enemy")
             {
-                Debug.Log("Estas muerto");
+                gameManager.PerderVida();
+                
+                
+                
             } 
+        
+            
             if (other.gameObject.tag == "DarkHole")
             {
                 if (lastCheckpointPosition != null)
