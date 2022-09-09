@@ -65,6 +65,7 @@ public class VaqueraController : MonoBehaviour
            
             
         }
+        
         else if (Input.GetKeyUp(KeyCode.G) && sr.flipX == false)
         {
             
