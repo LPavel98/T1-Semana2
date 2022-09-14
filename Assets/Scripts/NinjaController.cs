@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NinjaController : MonoBehaviour
 {
@@ -71,17 +72,18 @@ public class NinjaController : MonoBehaviour
         }
 
         //SLIDE
+        else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.RightArrow)){
+            rb.velocity = new Vector2(8, rb.velocity.y);
+            sr.flipX = false;
+            ChangeAnimation(ANIMATION_SLIDE);
+        }
         else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftArrow)){
-            rb.velocity = new Vector2(-7, rb.velocity.y);
+            rb.velocity = new Vector2(-8, rb.velocity.y);
             sr.flipX = true;
             ChangeAnimation(ANIMATION_SLIDE);
         }
 
-        else if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.RightArrow)){
-            rb.velocity = new Vector2(7, rb.velocity.y);
-            sr.flipX = false;
-            ChangeAnimation(ANIMATION_SLIDE);
-        }
+        
         else if (Input.GetKey(KeyCode.LeftArrow)){
             rb.velocity = new Vector2(-velocity, rb.velocity.y);
             sr.flipX = true;
@@ -171,6 +173,12 @@ public class NinjaController : MonoBehaviour
             if(other.collider.tag=="Tilemap"){
             saltosHechos = 0;  
             }
+            
+            if (other.gameObject.tag == "Moneda")
+            {
+                Destroy(other.gameObject);
+                gameManager.GanarPuntos(5);
+            }
 
             
     }
@@ -178,11 +186,7 @@ public class NinjaController : MonoBehaviour
         Debug.Log("trigger");
         lastCheckpointPosition = transform.position;
 
-        if (other.gameObject.tag == "Enemy")
-            {
-                Destroy(other.gameObject);
-                gameManager.GanarPuntos(10);
-            }
+        
     }
    
     private void ChangeAnimation(int animation){

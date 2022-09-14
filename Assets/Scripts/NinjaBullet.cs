@@ -28,10 +28,8 @@ public class NinjaBullet : MonoBehaviour
     void Start()
     {
             gameManager = FindObjectOfType<GameManagerController>();
-            ninjaController = FindObjectOfType<NinjaController>();
-            
-            rb = GetComponent<Rigidbody2D>();   
-            sr = GetComponent<SpriteRenderer>();
+            rb = GetComponent<Rigidbody2D>(); 
+            sr = GetComponent<SpriteRenderer>();    
             Destroy(this.gameObject, 5);
 
     }
@@ -41,6 +39,7 @@ public class NinjaBullet : MonoBehaviour
     {   
         
         rb.velocity = new Vector2(realVelocity, 0);
+
         if (realVelocity == -20)
         {
             sr.flipX = true;
@@ -50,7 +49,7 @@ public class NinjaBullet : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D other) {
-            //Destroy(this.gameObject); 
+            Destroy(this.gameObject); 
             if (other.gameObject.tag == "Enemy")
             {
                 Destroy(other.gameObject);
