@@ -18,7 +18,9 @@ public class BulletController : MonoBehaviour
         
     }
      public void SetLeftDirection(){
+        
         realVelocity = -velocity;
+        
     }
     void Start()
     {
@@ -31,6 +33,7 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
             rb.velocity = new Vector2(realVelocity, 0);
  
         

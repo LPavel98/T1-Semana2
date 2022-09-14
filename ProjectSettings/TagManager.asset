@@ -10,6 +10,7 @@ TagManager:
   - Caballero
   - DarkHole
   - Enemy
+  - Moneda
   layers:
   - Default
   - TransparentFX

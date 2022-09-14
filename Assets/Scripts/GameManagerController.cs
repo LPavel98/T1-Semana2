@@ -47,7 +47,7 @@ public class GameManagerController : MonoBehaviour
     }
 
     private void PrintScoreInScreen(){
-        scoreText.text = "Puntaje: " + score;
+        scoreText.text = "Monedas: " + score;
     }
 
     
