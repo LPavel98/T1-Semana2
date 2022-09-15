@@ -54,6 +54,7 @@ public class NinjaBullet : MonoBehaviour
             {
                 Destroy(other.gameObject);
                 gameManager.GanarPuntos(10);
+                gameManager.SaveGame();
             }
               
     }

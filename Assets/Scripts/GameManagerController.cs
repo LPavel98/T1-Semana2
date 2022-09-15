@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameManagerController : MonoBehaviour
 {
@@ -28,6 +30,7 @@ public class GameManagerController : MonoBehaviour
         PrintScoreInScreen();
         PrintLivesInScreen();
         PrintBulletsInScreen();
+        LoadGame();
         // audioSource.PlayOneShot(WorldClip);
     }
 
@@ -68,6 +71,52 @@ public class GameManagerController : MonoBehaviour
            
         }
         
+    }
+
+    public void SaveGame()
+    {
+        var filePath=Application.persistentDataPath + "/save.dat";
+
+        FileStream file;
+
+        if (File.Exists(filePath))
+            file=File.OpenWrite(filePath);
+
+        else 
+            file=File.Create(filePath);
+
+        GameData data =new GameData();
+        data.Score=score;
+
+        BinaryFormatter bf =new BinaryFormatter();
+        bf.Serialize(file, data);
+        file.Close();
+
+    }
+
+    public void LoadGame()
+    {
+        var filePath=Application.persistentDataPath + "/save.dat";
+
+        FileStream file;
+
+        if (File.Exists(filePath))
+            file=File.OpenRead(filePath);
+
+        else {
+            Debug.LogError("No se encuentra el archivo");
+            
+            return;
+        
+        }
+
+        BinaryFormatter bf =new BinaryFormatter();
+        GameData data = (GameData)bf.Deserialize(file);
+        file.Close();
+
+        score=data.Score;
+        PrintScoreInScreen();
+
     }
 
     private void PrintScoreInScreen(){
