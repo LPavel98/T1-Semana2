@@ -34,7 +34,7 @@ public class ZombiAttackController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            rb.velocity = new Vector2(-velocity, rb.velocity.y);
+            rb.velocity = new Vector2(0, rb.velocity.y);
             sr.flipX = true;
             ChangeAnimation(ANIMATION_CAMINAR);
         // Debug.Log("Puede saltar"+puedeSaltar.ToString());

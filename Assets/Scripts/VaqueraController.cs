@@ -156,10 +156,7 @@ public class VaqueraController : MonoBehaviour
         puedeSaltar = true;
             if (other.gameObject.tag == "Enemy")
             {
-                gameManager.PerderVida();
-                
-                
-                
+                gameManager.PerderVida();  
             } 
             if (other.gameObject.name == "DarkHole")
             {

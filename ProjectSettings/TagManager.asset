@@ -11,6 +11,7 @@ TagManager:
   - DarkHole
   - Enemy
   - Moneda
+  - Hongo
   layers:
   - Default
   - TransparentFX

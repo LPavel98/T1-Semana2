@@ -8,7 +8,7 @@ public class NinjaController : MonoBehaviour
     public AudioClip jumpClip;
     public AudioClip bulletClip;
     public AudioClip powerupClip;
-    public AudioClip WorldClip;
+    
     public AudioClip coinClip;
 
 
@@ -53,7 +53,7 @@ public class NinjaController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        audioSource.PlayOneShot(WorldClip);
+        
     }
 
     // Update is called once per frame
@@ -164,6 +164,13 @@ public class NinjaController : MonoBehaviour
             
         }
 
+        else if (gameManager.livesText.text == "GAME OVER")
+                {
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+                    ChangeAnimation(ANIMATION_DEAD);
+                    
+                }
+
         
 
         //DEAD
@@ -189,18 +196,10 @@ public class NinjaController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other) {
         Debug.Log("Puede saltar");
         puedeSaltar = true;
-        // if (other.gameObject.tag == "Enemy")
-        //     {
-        //         gameManager.PerderVida();
-        //     } 
-            // if (other.gameObject.name == "Hongo")
-            // {
-            //     // Debug.Log("Estas muerto");
-            //     // gameManager.PerderVida();
-            //     transform.localScale = new Vector3(0.7F, 0.7F, 1);
-            //     audioSource.PlayOneShot(powerupClip);
-
-            // }
+            if (other.gameObject.tag == "Enemy")
+            {
+                gameManager.PerderVida();
+            }
 
             if (other.gameObject.name == "DarkHole")
             {
@@ -220,6 +219,25 @@ public class NinjaController : MonoBehaviour
                 gameManager.GanarPuntos(5);
                 audioSource.PlayOneShot(coinClip);
             }
+            if (other.gameObject.tag == "Hongo")
+            {
+                Destroy(other.gameObject);
+                
+                gameManager.GanarVidas(1);
+                transform.localScale = new Vector3(0.5F, 0.5F, 1);
+                audioSource.PlayOneShot(powerupClip);
+            }
+
+
+
+
+            // if (other.gameObject.tag == "Enemy")
+            // {
+            //     gameManager.PerderVida();
+            //     transform.localScale = new Vector3(0.3F, 0.3F, 1);
+            //    //Destroy(other.gameObject);
+            //     //gameManager.GanarPuntos(10);
+            // }
 
             
     }

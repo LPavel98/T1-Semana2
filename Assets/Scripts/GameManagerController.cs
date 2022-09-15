@@ -5,19 +5,24 @@ using UnityEngine.UI;
 
 public class GameManagerController : MonoBehaviour
 {
+    // public AudioClip WorldClip;
     private VaqueraController vaqueraController;
     public Text scoreText;
     public Text livesText;
     private int score;
     private int lives;
+
+    // AudioSource audioSource;
     
     // Start is called before the first frame update
     void Start()
     {
+        // audioSource = GetComponent<AudioSource>();
         score = 0;
         lives = 3;
         PrintScoreInScreen();
         PrintLivesInScreen();
+        // audioSource.PlayOneShot(WorldClip);
     }
 
     // Update is called once per frame
@@ -33,6 +38,10 @@ public class GameManagerController : MonoBehaviour
         score += puntos;
         PrintScoreInScreen();
     }
+    public void GanarVidas(int vidas){
+        lives += vidas;
+        PrintLivesInScreen();
+    }
     public void PerderVida(){
         lives -= 1;
         PrintLivesInScreen();
@@ -40,7 +49,6 @@ public class GameManagerController : MonoBehaviour
         {
             
             livesText.text = "GAME OVER";
-            
            
         }
         
