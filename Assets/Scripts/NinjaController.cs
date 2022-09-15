@@ -150,6 +150,15 @@ public class NinjaController : MonoBehaviour
             
         }
 
+        else if(Input.GetKey(KeyCode.Z)){
+            
+                
+                rb.velocity = new Vector2(0, rb.velocity.y);
+                
+                ChangeAnimation(ANIMATION_glide);
+            
+        }
+
         //SALTAR
         else if(Input.GetKeyUp(KeyCode.Space)){
             if(saltosHechos<limiteSaltos){
@@ -212,6 +221,7 @@ public class NinjaController : MonoBehaviour
             if(other.collider.tag=="Tilemap"){
             saltosHechos = 0;  
             }
+
             
             if (other.gameObject.tag == "Moneda")
             {
