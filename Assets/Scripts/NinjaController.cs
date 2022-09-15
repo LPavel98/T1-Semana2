@@ -5,6 +5,14 @@ using UnityEngine.UI;
 
 public class NinjaController : MonoBehaviour
 {
+    public AudioClip jumpClip;
+    public AudioClip bulletClip;
+    public AudioClip powerupClip;
+    public AudioClip WorldClip;
+    public AudioClip coinClip;
+
+
+
     public bool ClimbingAllowed{get; set;}
     Rigidbody2D rb; 
     SpriteRenderer sr;
@@ -33,22 +41,25 @@ public class NinjaController : MonoBehaviour
 
     private Vector3 lastCheckpointPosition;
     private GameManagerController gameManager;
-
+    AudioSource audioSource;
 
     //escalera
     private float dirX, dirY;
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         gameManager = FindObjectOfType<GameManagerController>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        audioSource.PlayOneShot(WorldClip);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         Debug.Log("Puede saltar"+puedeSaltar.ToString());
          puedeSaltar = true;
 
@@ -70,6 +81,7 @@ public class NinjaController : MonoBehaviour
                 var controller = gb.GetComponent<NinjaBullet>();
                 controller.SetLeftDirection();
                 ChangeAnimation(ANIMATION_throw);
+                audioSource.PlayOneShot(bulletClip);
  
         }
         
@@ -81,6 +93,7 @@ public class NinjaController : MonoBehaviour
                 var controller = gb.GetComponent<NinjaBullet>();
                 controller.SetRightDirection();  
                 ChangeAnimation(ANIMATION_throw);
+                audioSource.PlayOneShot(bulletClip);
            
         }
 
@@ -145,6 +158,7 @@ public class NinjaController : MonoBehaviour
                 
                 saltosHechos++;
                 ChangeAnimation(ANIMATION_Saltar);
+                audioSource.PlayOneShot(jumpClip);
                 
             }
             
@@ -179,7 +193,15 @@ public class NinjaController : MonoBehaviour
         //     {
         //         gameManager.PerderVida();
         //     } 
-           
+            // if (other.gameObject.name == "Hongo")
+            // {
+            //     // Debug.Log("Estas muerto");
+            //     // gameManager.PerderVida();
+            //     transform.localScale = new Vector3(0.7F, 0.7F, 1);
+            //     audioSource.PlayOneShot(powerupClip);
+
+            // }
+
             if (other.gameObject.name == "DarkHole")
             {
                 if (lastCheckpointPosition != null)
@@ -196,6 +218,7 @@ public class NinjaController : MonoBehaviour
             {
                 Destroy(other.gameObject);
                 gameManager.GanarPuntos(5);
+                audioSource.PlayOneShot(coinClip);
             }
 
             
