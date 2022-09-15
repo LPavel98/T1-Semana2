@@ -30,7 +30,7 @@ public class NinjaController : MonoBehaviour
     //const int ANIMATION_jumpattack = 12;
     const int ANIMATION_jumpthrow = 13;
     const int ANIMATION_throw = 14;
-
+    private int balas = 0;
 
     bool puedeSaltar = true;
     private int saltosHechos;
@@ -72,7 +72,7 @@ public class NinjaController : MonoBehaviour
          } 
 
         //CORRER
-        if (Input.GetKeyUp(KeyCode.G) && sr.flipX == true)
+        if (Input.GetKeyUp(KeyCode.G) && sr.flipX == true && balas < 5)
         {
             
                 
@@ -82,10 +82,12 @@ public class NinjaController : MonoBehaviour
                 controller.SetLeftDirection();
                 ChangeAnimation(ANIMATION_throw);
                 audioSource.PlayOneShot(bulletClip);
+                gameManager.PerderBalas();
+                balas++;
  
         }
         
-        else if (Input.GetKeyUp(KeyCode.G) && sr.flipX == false)
+        else if (Input.GetKeyUp(KeyCode.G) && sr.flipX == false && balas < 5)
         {
                 
                 var bulletPosition = transform.position + new Vector3(2,0,0);
@@ -94,6 +96,8 @@ public class NinjaController : MonoBehaviour
                 controller.SetRightDirection();  
                 ChangeAnimation(ANIMATION_throw);
                 audioSource.PlayOneShot(bulletClip);
+                gameManager.PerderBalas();
+                balas++;
            
         }
 

@@ -9,8 +9,12 @@ public class GameManagerController : MonoBehaviour
     private VaqueraController vaqueraController;
     public Text scoreText;
     public Text livesText;
+    public Text bulletText;
+
     private int score;
     private int lives;
+
+    private int bullet;
 
     // AudioSource audioSource;
     
@@ -18,10 +22,12 @@ public class GameManagerController : MonoBehaviour
     void Start()
     {
         // audioSource = GetComponent<AudioSource>();
+        bullet = 5;
         score = 0;
         lives = 3;
         PrintScoreInScreen();
         PrintLivesInScreen();
+        PrintBulletsInScreen();
         // audioSource.PlayOneShot(WorldClip);
     }
 
@@ -33,6 +39,16 @@ public class GameManagerController : MonoBehaviour
     public int Lives(){
         return lives;
     }
+
+    public int Bullet(){
+        return bullet;
+    }
+
+    public void PerderBalas(){
+        bullet -= 1;
+        PrintBulletsInScreen();
+    }
+
 
     public void GanarPuntos(int puntos){
         score += puntos;
@@ -61,5 +77,9 @@ public class GameManagerController : MonoBehaviour
     
     private void PrintLivesInScreen(){
         livesText.text = "Vida: " + lives;
+    }
+
+    private void PrintBulletsInScreen(){
+        bulletText.text = "Balas: " + bullet;
     }
 }
