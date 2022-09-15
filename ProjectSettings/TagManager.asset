@@ -12,6 +12,8 @@ TagManager:
   - Enemy
   - Moneda
   - Hongo
+  - Moneda2
+  - Moneda3
   layers:
   - Default
   - TransparentFX

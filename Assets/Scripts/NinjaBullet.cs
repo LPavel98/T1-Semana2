@@ -53,8 +53,8 @@ public class NinjaBullet : MonoBehaviour
             if (other.gameObject.tag == "Enemy")
             {
                 Destroy(other.gameObject);
-                gameManager.GanarPuntos(10);
-                gameManager.SaveGame();
+                gameManager.PerderBalas(10);
+                // gameManager.SaveGame();
             }
               
     }

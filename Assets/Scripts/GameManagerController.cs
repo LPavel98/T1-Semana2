@@ -12,8 +12,12 @@ public class GameManagerController : MonoBehaviour
     public Text scoreText;
     public Text livesText;
     public Text bulletText;
+    public Text scoreText2;
+    public Text scoreText3;
 
     private int score;
+    private int score2;
+    private int score3;
     private int lives;
 
     private int bullet;
@@ -26,10 +30,16 @@ public class GameManagerController : MonoBehaviour
         // audioSource = GetComponent<AudioSource>();
         bullet = 5;
         score = 0;
+        score2 = 0;
+        score3 = 0;
+        
         lives = 3;
         PrintScoreInScreen();
+        PrintScore2InScreen();
+        PrintScore3InScreen();
         PrintLivesInScreen();
         PrintBulletsInScreen();
+        
         LoadGame();
         // audioSource.PlayOneShot(WorldClip);
     }
@@ -37,6 +47,12 @@ public class GameManagerController : MonoBehaviour
     // Update is called once per frame
     public int Score(){
         return score;
+    }
+    public int Score2(){
+        return score2;
+    }
+    public int Score3(){
+        return score3;
     }
 
     public int Lives(){
@@ -47,8 +63,8 @@ public class GameManagerController : MonoBehaviour
         return bullet;
     }
 
-    public void PerderBalas(){
-        bullet -= 1;
+    public void PerderBalas(int bal){
+        bullet += bal;
         PrintBulletsInScreen();
     }
 
@@ -56,6 +72,14 @@ public class GameManagerController : MonoBehaviour
     public void GanarPuntos(int puntos){
         score += puntos;
         PrintScoreInScreen();
+    }
+    public void GanarPuntos2(int puntos2){
+        score2 += puntos2;
+        PrintScore2InScreen();
+    }
+    public void GanarPuntos3 (int puntos3){
+        score3 += puntos3;
+        PrintScore3InScreen();
     }
     public void GanarVidas(int vidas){
         lives += vidas;
@@ -87,6 +111,9 @@ public class GameManagerController : MonoBehaviour
 
         GameData data =new GameData();
         data.Score=score;
+        data.Score2=score2;
+        data.Score3=score3;
+        data.Bullet = bullet;
 
         BinaryFormatter bf =new BinaryFormatter();
         bf.Serialize(file, data);
@@ -115,12 +142,24 @@ public class GameManagerController : MonoBehaviour
         file.Close();
 
         score=data.Score;
+        score2=data.Score2;
+        score3=data.Score3;
+        bullet=data.Bullet;
         PrintScoreInScreen();
+        PrintScore2InScreen();
+        PrintScore3InScreen();
+        PrintBulletsInScreen();
 
     }
 
     private void PrintScoreInScreen(){
         scoreText.text = "Monedas: " + score;
+    }
+    private void PrintScore2InScreen(){
+        scoreText2.text = "Monedas2: " + score2;
+    }
+    private void PrintScore3InScreen(){
+        scoreText3.text = "Monedas3: " + score3;
     }
 
     
@@ -129,6 +168,6 @@ public class GameManagerController : MonoBehaviour
     }
 
     private void PrintBulletsInScreen(){
-        bulletText.text = "Balas: " + bullet;
+        bulletText.text = "Enemigos: " + bullet;
     }
 }
