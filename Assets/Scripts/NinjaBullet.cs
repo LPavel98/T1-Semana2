@@ -40,7 +40,7 @@ public class NinjaBullet : MonoBehaviour
         
         rb.velocity = new Vector2(realVelocity, 0);
 
-        if (realVelocity == -20)
+        if (realVelocity == -25)
         {
             sr.flipX = true;
         }
