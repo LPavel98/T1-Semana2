@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class NinjaController : MonoBehaviour
 {
+    public bool ClimbingAllowed{get; set;}
     Rigidbody2D rb; 
     SpriteRenderer sr;
     
@@ -33,6 +34,10 @@ public class NinjaController : MonoBehaviour
     private Vector3 lastCheckpointPosition;
     private GameManagerController gameManager;
 
+
+    //escalera
+    private float dirX, dirY;
+
     void Start()
     {
         gameManager = FindObjectOfType<GameManagerController>();
@@ -46,6 +51,14 @@ public class NinjaController : MonoBehaviour
     {
         Debug.Log("Puede saltar"+puedeSaltar.ToString());
          puedeSaltar = true;
+
+         dirX = Input.GetAxisRaw("Horizontal") * velocity;
+         ChangeAnimation(ANIMATION_climb);
+         if (ClimbingAllowed)
+         {
+            dirY = Input.GetAxisRaw("Vertical") * velocity;
+            ChangeAnimation(ANIMATION_climb);
+         } 
 
         //CORRER
         if (Input.GetKeyUp(KeyCode.G) && sr.flipX == true)
@@ -69,6 +82,11 @@ public class NinjaController : MonoBehaviour
                 controller.SetRightDirection();  
                 ChangeAnimation(ANIMATION_throw);
            
+        }
+
+        else if (Input.GetKey(KeyCode.UpArrow) && ClimbingAllowed || Input.GetKey(KeyCode.DownArrow)&& ClimbingAllowed)
+        {
+               ChangeAnimation(ANIMATION_climb);
         }
 
         //SLIDE
@@ -192,6 +210,22 @@ public class NinjaController : MonoBehaviour
     private void ChangeAnimation(int animation){
         animator.SetInteger("Estado", animation);
 
+    }
+
+    private void FixedUpdate() {
+        if (ClimbingAllowed)
+        {
+            rb.isKinematic = true;
+            rb.velocity = new Vector2(dirX, dirY);
+            
+        }
+        else
+        {
+            rb.isKinematic = false;
+            rb.velocity = new Vector2(dirX, rb.velocity.y);
+            
+            //rb.velocity = new Vector2(velocity, rb.velocity.y);
+        }
     }
 
 }
