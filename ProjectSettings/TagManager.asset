@@ -14,6 +14,7 @@ TagManager:
   - Hongo
   - Moneda2
   - Moneda3
+  - Checkpoint2
   layers:
   - Default
   - TransparentFX

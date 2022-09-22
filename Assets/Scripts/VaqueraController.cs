@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class VaqueraController : MonoBehaviour
 {
@@ -181,6 +183,13 @@ public class VaqueraController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         Debug.Log("trigger");
         lastCheckpointPosition = transform.position;
+        if (other.gameObject.name == "nube"){
+            Destroy(other.gameObject);
+            rb.gravityScale = 0;
+            //tieneNube = true;
+            animator.SetInteger("Estado", 1);
+            SceneManager.LoadScene(GameManagerController.primeraEscena);
+        } 
     }
    
     private void ChangeAnimation(int animation){

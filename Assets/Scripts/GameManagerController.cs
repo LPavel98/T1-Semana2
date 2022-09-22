@@ -7,6 +7,12 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class GameManagerController : MonoBehaviour
 {
+    public const int primeraEscena = 0;
+    public const int segundaEscena = 1;
+    public const int tercerEscena = 2;
+    
+
+
     // public AudioClip WorldClip;
     private VaqueraController vaqueraController;
     public Text scoreText;

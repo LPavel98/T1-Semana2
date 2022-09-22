@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class NinjaController : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class NinjaController : MonoBehaviour
     public bool ClimbingAllowed{get; set;}
     Rigidbody2D rb; 
     SpriteRenderer sr;
-    
+    bool colisionoConCheckpoint2;
     Animator animator;
     public GameObject bullet;
     const int ANIMATION_QUIETO = 0;
@@ -59,7 +60,7 @@ public class NinjaController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //colisionoConCheckpoint2=false;
         Debug.Log("Puede saltar"+puedeSaltar.ToString());
          puedeSaltar = true;
 
@@ -216,11 +217,14 @@ public class NinjaController : MonoBehaviour
 
             if (other.gameObject.name == "DarkHole")
             {
+                
                 if (lastCheckpointPosition != null)
                 {
                     transform.position = lastCheckpointPosition;
                 }
+                
             }
+            
 
             if(other.collider.tag=="Tilemap"){
             saltosHechos = 0;  
@@ -257,6 +261,8 @@ public class NinjaController : MonoBehaviour
                 audioSource.PlayOneShot(powerupClip);
             }
 
+           
+
 
 
 
@@ -272,8 +278,24 @@ public class NinjaController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other) {
         Debug.Log("trigger");
-        lastCheckpointPosition = transform.position;
+        if (other.gameObject.tag == "Checkpoint" && colisionoConCheckpoint2 == false)
+        {
+            lastCheckpointPosition = transform.position;
         gameManager.SaveGame();
+        }
+        if (other.gameObject.tag == "Checkpoint2" )
+        {
+            lastCheckpointPosition = transform.position;
+             gameManager.SaveGame();
+            colisionoConCheckpoint2 = true;
+        }
+
+         if (other.gameObject.name == "nube"){
+            Destroy(other.gameObject);
+            rb.gravityScale = 0;
+            animator.SetInteger("Estado", 1);
+            SceneManager.LoadScene(GameManagerController.segundaEscena);
+        } 
 
         
     }

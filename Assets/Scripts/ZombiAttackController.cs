@@ -6,7 +6,7 @@ public class ZombiAttackController : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public float velocity = 10;
+    public float velocity;
   
     Rigidbody2D rb; 
     SpriteRenderer sr;
@@ -34,8 +34,8 @@ public class ZombiAttackController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-            sr.flipX = true;
+            rb.velocity = new Vector2(velocity, rb.velocity.y);
+            //sr.flipX = true;
             ChangeAnimation(ANIMATION_CAMINAR);
         // Debug.Log("Puede saltar"+puedeSaltar.ToString());
         //  puedeSaltar = true;
@@ -116,6 +116,16 @@ public class ZombiAttackController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         Debug.Log("trigger");
         lastCheckpointPosition = transform.position;
+        if (other.gameObject.name == "limiteDerecho")
+        {
+            velocity *= -1;
+            sr.flipX = true;
+        }
+        if (other.gameObject.name == "limiteIzquierdo")
+        {
+            velocity *= -1;
+            sr.flipX = false;
+        }
     }
    
     private void ChangeAnimation(int animation){
