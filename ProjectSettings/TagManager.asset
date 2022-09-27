@@ -15,6 +15,9 @@ TagManager:
   - Moneda2
   - Moneda3
   - Checkpoint2
+  - otraScena
+  - limiteDerecho
+  - limiteIzquierdo
   layers:
   - Default
   - TransparentFX

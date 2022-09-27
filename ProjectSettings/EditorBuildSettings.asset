@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/2Scene.unity
+    path: Assets/Scenes/MegamanScene.unity
     guid: 889cd67e3eae22746a537bfd06a5e537
   - enabled: 1
     path: Assets/Scenes/GokuScene.unity
@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ZombiScene.unity
     guid: 2ac961d5dbab3d64ba5a5e25eb4c6fb9
+  - enabled: 1
+    path: Assets/Scenes/BotonesScene.unity
+    guid: f8dabf8889d52ac4788b21f0419e26b9
   m_configObjects: {}

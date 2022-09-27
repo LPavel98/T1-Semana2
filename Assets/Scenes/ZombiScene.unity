@@ -309,6 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 1
+  vidaEnemigo: 3
 --- !u!1001 &208683094
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -342,7 +343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283759, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283759, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_LocalScale.x
@@ -413,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 1
+  vidaEnemigo: 3
 --- !u!1 &263155547 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6853992019581283753, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
@@ -431,6 +433,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 1
+  vidaEnemigo: 3
 --- !u!1 &285190333
 GameObject:
   m_ObjectHideFlags: 0
@@ -11718,6 +11721,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 1
+  vidaEnemigo: 3
 --- !u!1 &516089644
 GameObject:
   m_ObjectHideFlags: 0
@@ -11923,6 +11927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 1
+  vidaEnemigo: 3
 --- !u!1001 &658582513
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11956,7 +11961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283759, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283759, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_LocalScale.x
@@ -12240,6 +12245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 1
+  vidaEnemigo: 3
 --- !u!1 &997364634
 GameObject:
   m_ObjectHideFlags: 0
@@ -12353,7 +12359,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283759, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283759, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_LocalScale.x
@@ -12439,7 +12445,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283759, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283759, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_LocalScale.x
@@ -12525,7 +12531,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283759, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283759, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_LocalScale.x
@@ -12596,6 +12602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 1
+  vidaEnemigo: 3
 --- !u!1 &1279780034
 GameObject:
   m_ObjectHideFlags: 0
@@ -12626,7 +12633,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1279780036
 MonoBehaviour:
@@ -12768,7 +12775,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5754777550521751536, guid: 312da940a2e5838498ed6c57fec235f3, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5754777550521751536, guid: 312da940a2e5838498ed6c57fec235f3, type: 3}
       propertyPath: m_LocalScale.x
@@ -12937,7 +12944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283759, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283759, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_LocalScale.x
@@ -13007,11 +13014,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6068987485308796283, guid: 06240a880c0e2e84f8884b0dcee82b12, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.57
+      value: -8.32
       objectReference: {fileID: 0}
     - target: {fileID: 6068987485308796283, guid: 06240a880c0e2e84f8884b0dcee82b12, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.29
+      value: 5.66
       objectReference: {fileID: 0}
     - target: {fileID: 6068987485308796283, guid: 06240a880c0e2e84f8884b0dcee82b12, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13249,6 +13256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 1
+  vidaEnemigo: 3
 --- !u!1001 &1629493078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13437,6 +13445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 1
+  vidaEnemigo: 3
 --- !u!1 &1665461510
 GameObject:
   m_ObjectHideFlags: 0
@@ -13523,6 +13532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 1
+  vidaEnemigo: 3
 --- !u!1001 &2114333703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13556,7 +13566,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283759, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283759, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_LocalScale.x

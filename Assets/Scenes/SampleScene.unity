@@ -442,7 +442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5754777550521751536, guid: 312da940a2e5838498ed6c57fec235f3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.0182
+      value: -8.11
       objectReference: {fileID: 0}
     - target: {fileID: 5754777550521751536, guid: 312da940a2e5838498ed6c57fec235f3, type: 3}
       propertyPath: m_LocalPosition.y
@@ -883,6 +883,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreText: {fileID: 1296502407}
   livesText: {fileID: 1294350100}
+  bulletText: {fileID: 0}
+  scoreText2: {fileID: 0}
+  scoreText3: {fileID: 0}
 --- !u!4 &618371581
 Transform:
   m_ObjectHideFlags: 0
@@ -4033,7 +4036,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &1841519816
 GameObject:
   m_ObjectHideFlags: 0
@@ -4136,6 +4139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocity: 10
+  vidaEnemigo: 3
 --- !u!1 &1914786883
 GameObject:
   m_ObjectHideFlags: 0

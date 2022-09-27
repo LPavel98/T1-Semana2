@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NinjaBullet : MonoBehaviour
+public class GokuBulletController : MonoBehaviour
 
 {
-    //private NinjaController ninjaController;
 
     private GameManagerController gameManager;
     public float velocity = 20;
     Rigidbody2D rb;
     float realVelocity;
     SpriteRenderer sr;
-    public int danio = 1;
     
    
     public void SetRightDirection(){
@@ -23,18 +21,12 @@ public class NinjaBullet : MonoBehaviour
      public void SetLeftDirection(){
         
         realVelocity = -velocity;
-
         
     }
-
-    public void SetDanio(int d){
-        danio = d;
-    }
-
     void Start()
     {
             gameManager = FindObjectOfType<GameManagerController>();
-            rb = GetComponent<Rigidbody2D>(); 
+            rb = GetComponent<Rigidbody2D>();  
             sr = GetComponent<SpriteRenderer>();    
             Destroy(this.gameObject, 5);
 
@@ -42,15 +34,10 @@ public class NinjaBullet : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
+    {
         
-        rb.velocity = new Vector2(realVelocity, 0);
-
-        if (realVelocity == -25)
-        {
-            sr.flipX = true;
-        }
-        
+            rb.velocity = new Vector2(realVelocity, 0);
+ 
         
     }
 
@@ -59,8 +46,7 @@ public class NinjaBullet : MonoBehaviour
             if (other.gameObject.tag == "Enemy")
             {
                 Destroy(other.gameObject);
-                gameManager.PerderBalas(10);
-                gameManager.SaveGame();
+                gameManager.GanarPuntos(10);
             }
               
     }

@@ -7,8 +7,9 @@ public class SantaController : MonoBehaviour
     public float JumpForce = 20;
 
     public float velocity = 10;
+    private float defaultVelocity;
     public int Saltos;
-    Rigidbody2D rb; 
+    Rigidbody2D rb;
     SpriteRenderer sr;
     Animator animator;
     const int ANIMATION_QUIETO = 0;
@@ -23,7 +24,9 @@ public class SantaController : MonoBehaviour
     public int limiteSaltos = 2;
 
     private Vector3 lastCheckpointPosition;
-   
+
+    public GameObject bullet;
+
     void Start()
     {
         Debug.Log("Iniciamos script de player");
@@ -35,104 +38,123 @@ public class SantaController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Puede saltar"+puedeSaltar.ToString());
-         puedeSaltar = true;
-
-        //CORRER
-        if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.X)){
-            rb.velocity = new Vector2(-20, rb.velocity.y);
-            sr.flipX = true;
-            ChangeAnimation(ANIMATION_CORRER);
-        }
-
-        else if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.X)){
-            rb.velocity = new Vector2(20, rb.velocity.y);
-            sr.flipX = false;
-            ChangeAnimation(ANIMATION_CORRER);
-        }
-        //SLIDE
-        else if (Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.LeftArrow)){
-            rb.velocity = new Vector2(-20, rb.velocity.y);
-            sr.flipX = true;
-            ChangeAnimation(ANIMATION_SLIDE);
-        }
-
-        else if (Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.RightArrow)){
-            rb.velocity = new Vector2(20, rb.velocity.y);
-            sr.flipX = false;
-            ChangeAnimation(ANIMATION_SLIDE);
-        }
-
+        Debug.Log("Puede saltar" + puedeSaltar.ToString());
+        puedeSaltar = true;
         //CAMINAR
-        else if (Input.GetKey(KeyCode.RightArrow)){
-            rb.velocity = new Vector2(velocity, rb.velocity.y);  
-            sr.flipX = false;
-            ChangeAnimation(ANIMATION_CAMINAR);
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow)){
-            rb.velocity = new Vector2(-velocity, rb.velocity.y);
-            sr.flipX = true;
-            ChangeAnimation(ANIMATION_CAMINAR);
-        }
 
-        //SALTAR
-        else if(Input.GetKeyUp(KeyCode.Space)){
-            if(saltosHechos<limiteSaltos){
 
-                rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
-                
-                saltosHechos++;
-                ChangeAnimation(ANIMATION_Saltar);
-                
-            }
-            
-        }
+        // rb.velocity = new Vector2(0, rb.velocity.y);
+        // ChangeAnimation(ANIMATION_QUIETO);
 
-        //DEAD
-       else if(Input.GetKeyUp(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-            ChangeAnimation(ANIMATION_DEAD);
+            WalkToLeft();
+        }
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            StopWalkLeft();
+        }
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            WalkToRight();
+        }
+        if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            StopWalkRight();
         }
 
-        //QUIETO
-        else
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-            ChangeAnimation(ANIMATION_QUIETO);
+
+            BestJump();
+        }
+        if (Input.GetKeyUp(KeyCode.X))
+        {
+            Disparar();
         }
     }
 
-    
-    void OnCollisionEnter2D(Collision2D other) {
+
+
+    public void WalkToLeft()
+    {
+        rb.velocity = new Vector2(-velocity, rb.velocity.y);
+        sr.flipX = true;
+        ChangeAnimation(ANIMATION_CAMINAR);
+    }
+    public void StopWalkLeft()
+    {
+        rb.velocity = new Vector2(0, rb.velocity.y);
+        sr.flipX = true;
+        ChangeAnimation(ANIMATION_CAMINAR);
+    }
+    public void WalkToRight()
+    {
+        rb.velocity = new Vector2(velocity, rb.velocity.y);
+        sr.flipX = false;
+        ChangeAnimation(ANIMATION_CAMINAR);
+    }
+    public void StopWalkRight()
+    {
+        rb.velocity = new Vector2(0, rb.velocity.y);
+        sr.flipX = false;
+        ChangeAnimation(ANIMATION_CAMINAR);
+    }
+    public void BestJump()
+    {
+        if (saltosHechos < limiteSaltos)
+        {
+            rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
+
+            saltosHechos++;
+            ChangeAnimation(ANIMATION_Saltar);
+        }
+
+    }
+    public void Disparar()
+    {
+        //ChangeAnimation(ANIMATION_Shoot);
+        var bulletPosition = transform.position + new Vector3(1, 0, 0);
+        var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
+        var controller = gb.GetComponent<BulletMegamanController>();
+        controller.SetRightDirection();
+    }
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
         Debug.Log("Puede saltar");
         puedeSaltar = true;
-            if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy")
+        {
+            Debug.Log("Estas muerto");
+        }
+        if (other.gameObject.name == "DarkHole")
+        {
+            if (lastCheckpointPosition != null)
             {
-                Debug.Log("Estas muerto");
-            } 
-            if (other.gameObject.name == "DarkHole")
-            {
-                if (lastCheckpointPosition != null)
-                {
-                    transform.position = lastCheckpointPosition;
-                }
+                transform.position = lastCheckpointPosition;
             }
-
-            if(other.collider.tag=="Tilemap"){
-            saltosHechos = 0;  
         }
 
-            
+        if (other.collider.tag == "Tilemap")
+        {
+            saltosHechos = 0;
+        }
+
+
     }
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         Debug.Log("trigger");
         lastCheckpointPosition = transform.position;
     }
-   
-    private void ChangeAnimation(int animation){
+
+    private void ChangeAnimation(int animation)
+    {
         animator.SetInteger("Estado", animation);
 
     }
+
+
 
 }

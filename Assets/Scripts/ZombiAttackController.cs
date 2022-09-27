@@ -15,6 +15,7 @@ public class ZombiAttackController : MonoBehaviour
     const int ANIMATION_CAMINAR = 1;
     const int ANIMATION_ATACAR = 3;
     const int ANIMATION_DEAD = 6;
+    public float vidaEnemigo = 3;
 
     // bool puedeSaltar = true;
     // private int saltosHechos;
@@ -91,6 +92,9 @@ public class ZombiAttackController : MonoBehaviour
             // rb.velocity = new Vector2(0, rb.velocity.y);
             // ChangeAnimation(ANIMATION_QUIETO);
         //}
+        if(vidaEnemigo<=0){
+            Destroy(this.gameObject);
+        }
     }
 
     
@@ -116,12 +120,12 @@ public class ZombiAttackController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         Debug.Log("trigger");
         lastCheckpointPosition = transform.position;
-        if (other.gameObject.name == "limiteDerecho")
+        if (other.gameObject.tag == "limiteDerecho")
         {
             velocity *= -1;
             sr.flipX = true;
         }
-        if (other.gameObject.name == "limiteIzquierdo")
+        if (other.gameObject.tag == "limiteIzquierdo")
         {
             velocity *= -1;
             sr.flipX = false;
@@ -131,6 +135,10 @@ public class ZombiAttackController : MonoBehaviour
     private void ChangeAnimation(int animation){
         animator.SetInteger("Estado", animation);
 
+    }
+    public void Damage(int a){
+        vidaEnemigo -= a;
+        //Debug.Log("Vida Enemigo: "+vidaEnemigo);
     }
 
 }

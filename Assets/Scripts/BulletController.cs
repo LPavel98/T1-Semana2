@@ -11,6 +11,7 @@ public class BulletController : MonoBehaviour
     public float velocity = 20;
     Rigidbody2D rb;
     float realVelocity;
+    SpriteRenderer sr;
     
    
     public void SetRightDirection(){
@@ -25,7 +26,8 @@ public class BulletController : MonoBehaviour
     void Start()
     {
             gameManager = FindObjectOfType<GameManagerController>();
-            rb = GetComponent<Rigidbody2D>();   
+            rb = GetComponent<Rigidbody2D>();  
+            sr = GetComponent<SpriteRenderer>();    
             Destroy(this.gameObject, 5);
 
     }

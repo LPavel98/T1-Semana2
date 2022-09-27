@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1005581584159279554}
   - component: {fileID: 1005581584159279558}
   - component: {fileID: 1005581584159279559}
-  - component: {fileID: 1005581584159279557}
+  - component: {fileID: 4571369182850153052}
   m_Layer: 0
   m_Name: kame
   m_TagString: Untagged
@@ -145,7 +145,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1005581584159279557
+--- !u!114 &4571369182850153052
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1005581584159279555}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b57d76413d0e441945d48e291abc76, type: 3}
+  m_Script: {fileID: 11500000, guid: ce67898d3b28c7744a90562da3868317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: 0
+  velocity: 20

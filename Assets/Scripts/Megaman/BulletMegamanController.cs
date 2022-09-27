@@ -1,14 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class NinjaBullet : MonoBehaviour
-
+public class BulletMegamanController : MonoBehaviour
 {
-    //private NinjaController ninjaController;
-
-    private GameManagerController gameManager;
+private GameManagerController gameManager;
     public float velocity = 20;
     Rigidbody2D rb;
     float realVelocity;
@@ -58,9 +54,7 @@ public class NinjaBullet : MonoBehaviour
             Destroy(this.gameObject); 
             if (other.gameObject.tag == "Enemy")
             {
-                Destroy(other.gameObject);
-                gameManager.PerderBalas(10);
-                gameManager.SaveGame();
+                other.gameObject.GetComponent<EnemyMegamanController>().Damage(danio);
             }
               
     }

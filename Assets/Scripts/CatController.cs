@@ -39,77 +39,63 @@ public class CatController : MonoBehaviour
     {
         Debug.Log("Puede saltar"+puedeSaltar.ToString());
          puedeSaltar = true;
-
-        //CORRER
-        if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.X)){
-            rb.velocity = new Vector2(-20, rb.velocity.y);
-            sr.flipX = true;
-            ChangeAnimation(ANIMATION_CORRER);
-        }
-
-        else if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.X)){
-            rb.velocity = new Vector2(20, rb.velocity.y);
-            sr.flipX = false;
-            ChangeAnimation(ANIMATION_CORRER);
-        }
-        //SLIDE
-        else if (Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.LeftArrow)){
-            rb.velocity = new Vector2(-20, rb.velocity.y);
-            sr.flipX = true;
-            ChangeAnimation(ANIMATION_SLIDE);
-        }
-
-        else if (Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.RightArrow)){
-            rb.velocity = new Vector2(20, rb.velocity.y);
-            sr.flipX = false;
-            ChangeAnimation(ANIMATION_SLIDE);
-        }
-
-        //CAMINAR
-        else if (Input.GetKey(KeyCode.RightArrow)){
-            rb.velocity = new Vector2(velocity, rb.velocity.y);  
-            sr.flipX = false;
-            ChangeAnimation(ANIMATION_CAMINAR);
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow)){
+         
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            ChangeAnimation(ANIMATION_QUIETO);
+        
+        if (Input.GetKey(KeyCode.LeftArrow))
+        {
             rb.velocity = new Vector2(-velocity, rb.velocity.y);
             sr.flipX = true;
-            ChangeAnimation(ANIMATION_CAMINAR);
+            ChangeAnimation(ANIMATION_CORRER);
         }
 
-        //SALTAR
-        else if(Input.GetKeyUp(KeyCode.Space)){
-            if(saltosHechos<limiteSaltos){
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            rb.velocity = new Vector2(velocity, rb.velocity.y);
+            sr.flipX = false;
+            ChangeAnimation(ANIMATION_CORRER);
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            if (saltosHechos < limiteSaltos)
+            {
 
                 rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
-                
+
                 saltosHechos++;
                 ChangeAnimation(ANIMATION_Saltar);
-                
+
             }
-            
+
         }
 
-        //DEAD
-       else if(Input.GetKeyUp(KeyCode.Q))
+        //HURT
+        if(Input.GetKeyUp(KeyCode.W))
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            ChangeAnimation(ANIMATION_HURT);
+        }
+        
+        //SLIDE
+        if (Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.LeftArrow)){
+            rb.velocity = new Vector2(-20, rb.velocity.y);
+            sr.flipX = true;
+            ChangeAnimation(ANIMATION_SLIDE);
+        }
+
+        if (Input.GetKey(KeyCode.C) && Input.GetKey(KeyCode.RightArrow)){
+            rb.velocity = new Vector2(20, rb.velocity.y);
+            sr.flipX = false;
+            ChangeAnimation(ANIMATION_SLIDE);
+        }
+
+        if(Input.GetKeyUp(KeyCode.Q))
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
             ChangeAnimation(ANIMATION_DEAD);
         }
 
-        //HURT
-        else if(Input.GetKeyUp(KeyCode.W))
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-            ChangeAnimation(ANIMATION_HURT);
-        }
-
-        //QUIETO
-        else
-        {
-            rb.velocity = new Vector2(0, rb.velocity.y);
-            ChangeAnimation(ANIMATION_QUIETO);
-        }
     }
 
     

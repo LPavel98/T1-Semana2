@@ -41,7 +41,7 @@ public class GokuController : MonoBehaviour
                animator.SetInteger("Estado", 4);
                 var bulletPosition = transform.position + new Vector3(2,0,0);
                 var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
-                var controller = gb.GetComponent<BulletController>();
+                var controller = gb.GetComponent<GokuBulletController>();
                 controller.SetRightDirection();
 
            
@@ -70,6 +70,9 @@ public class GokuController : MonoBehaviour
             rb.gravityScale = 0;
             tieneNube = true;
             animator.SetInteger("Estado", 1);
+        } 
+        if (other.gameObject.tag == "otraScena"){
+            
             SceneManager.LoadScene(GameManagerController.tercerEscena);
         } 
     }

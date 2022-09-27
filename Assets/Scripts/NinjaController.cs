@@ -61,6 +61,7 @@ public class NinjaController : MonoBehaviour
     void Update()
     {
         //colisionoConCheckpoint2=false;
+        //subir escalera
         Debug.Log("Puede saltar"+puedeSaltar.ToString());
          puedeSaltar = true;
 
@@ -83,12 +84,12 @@ public class NinjaController : MonoBehaviour
                 controller.SetLeftDirection();
                 ChangeAnimation(ANIMATION_throw);
                 audioSource.PlayOneShot(bulletClip);
-                // gameManager.PerderBalas();
-                // balas++;
+                 //gameManager.PerderBalas();
+                 balas++;
  
         }
         
-        else if (Input.GetKeyUp(KeyCode.G) && sr.flipX == false && balas < 5)
+        if (Input.GetKeyUp(KeyCode.G) && sr.flipX == false && balas < 5)
         {
                 
                 var bulletPosition = transform.position + new Vector3(2,0,0);
@@ -98,11 +99,11 @@ public class NinjaController : MonoBehaviour
                 ChangeAnimation(ANIMATION_throw);
                 audioSource.PlayOneShot(bulletClip);
                 // gameManager.PerderBalas();
-                // balas++;
+                 balas++;
            
         }
 
-        else if (Input.GetKey(KeyCode.UpArrow) && ClimbingAllowed || Input.GetKey(KeyCode.DownArrow)&& ClimbingAllowed)
+        if (Input.GetKey(KeyCode.UpArrow) && ClimbingAllowed || Input.GetKey(KeyCode.DownArrow)&& ClimbingAllowed)
         {
                ChangeAnimation(ANIMATION_climb);
         }
@@ -231,27 +232,7 @@ public class NinjaController : MonoBehaviour
             }
 
             
-            if (other.gameObject.tag == "Moneda")
-            {
-                Destroy(other.gameObject);
-                gameManager.GanarPuntos(10);
-                // gameManager.SaveGame();
-                audioSource.PlayOneShot(coinClip);
-            }
-            if (other.gameObject.tag == "Moneda2")
-            {
-                Destroy(other.gameObject);
-                gameManager.GanarPuntos2(20);
-                // gameManager.SaveGame();
-                audioSource.PlayOneShot(coinClip);
-            }
-            if (other.gameObject.tag == "Moneda3")
-            {
-                Destroy(other.gameObject);
-                gameManager.GanarPuntos3(30);
-                // gameManager.SaveGame();
-                audioSource.PlayOneShot(coinClip);
-            }
+            
             if (other.gameObject.tag == "Hongo")
             {
                 Destroy(other.gameObject);
@@ -296,6 +277,27 @@ public class NinjaController : MonoBehaviour
             animator.SetInteger("Estado", 1);
             SceneManager.LoadScene(GameManagerController.segundaEscena);
         } 
+        if (other.gameObject.tag == "Moneda")
+            {
+                Destroy(other.gameObject);
+                gameManager.GanarPuntos(10);
+                // gameManager.SaveGame();
+                audioSource.PlayOneShot(coinClip);
+            }
+            if (other.gameObject.tag == "Moneda2")
+            {
+                Destroy(other.gameObject);
+                gameManager.GanarPuntos2(20);
+                // gameManager.SaveGame();
+                audioSource.PlayOneShot(coinClip);
+            }
+            if (other.gameObject.tag == "Moneda3")
+            {
+                Destroy(other.gameObject);
+                gameManager.GanarPuntos3(30);
+                // gameManager.SaveGame();
+                audioSource.PlayOneShot(coinClip);
+            }
 
         
     }
