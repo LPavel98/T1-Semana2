@@ -356,6 +356,10 @@ PrefabInstance:
       propertyPath: bullet
       value: 
       objectReference: {fileID: 4801800329084168482, guid: 3d9b2a2274528b74cbf4ed77db7b2436, type: 3}
+    - target: {fileID: 835004258411087140, guid: 5db6e01154acbef44ba7ee48a89da6ba, type: 3}
+      propertyPath: velocity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 835004258411087161, guid: 5db6e01154acbef44ba7ee48a89da6ba, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -570,7 +574,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1257519342}
           m_TargetAssemblyTypeName: SantaController, Assembly-CSharp
-          m_MethodName: StopWalkLeft
+          m_MethodName: StopWalk
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -738,7 +742,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1257519342}
           m_TargetAssemblyTypeName: SantaController, Assembly-CSharp
-          m_MethodName: StopWalkRight
+          m_MethodName: StopWalk
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

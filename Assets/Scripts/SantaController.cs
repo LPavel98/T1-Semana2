@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class SantaController : MonoBehaviour
 {
+
+    private float timeLeft = 0;
     public float JumpForce = 20;
 
-    public float velocity = 10;
-    private float defaultVelocity;
+    public float velocity = 0;
+    private float defaultVelocity = 10;
     public int Saltos;
     Rigidbody2D rb;
     SpriteRenderer sr;
@@ -27,6 +29,7 @@ public class SantaController : MonoBehaviour
 
     public GameObject bullet;
 
+
     void Start()
     {
         Debug.Log("Iniciamos script de player");
@@ -38,68 +41,57 @@ public class SantaController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Puede saltar" + puedeSaltar.ToString());
+        //Debug.Log("Puede saltar" + puedeSaltar.ToString());
         puedeSaltar = true;
-        //CAMINAR
-
-
-        // rb.velocity = new Vector2(0, rb.velocity.y);
-        // ChangeAnimation(ANIMATION_QUIETO);
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            WalkToLeft();
-        }
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            StopWalkLeft();
-        }
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            WalkToRight();
-        }
-        if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            StopWalkRight();
-        }
-
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-
-            BestJump();
-        }
-        if (Input.GetKeyUp(KeyCode.X))
-        {
-            Disparar();
-        }
+        
+        Walk();
+        
     }
+    
 
-
-
-    public void WalkToLeft()
-    {
-        rb.velocity = new Vector2(-velocity, rb.velocity.y);
-        sr.flipX = true;
-        ChangeAnimation(ANIMATION_CAMINAR);
-    }
-    public void StopWalkLeft()
-    {
-        rb.velocity = new Vector2(0, rb.velocity.y);
-        sr.flipX = true;
-        ChangeAnimation(ANIMATION_CAMINAR);
-    }
-    public void WalkToRight()
+    private void Walk()
     {
         rb.velocity = new Vector2(velocity, rb.velocity.y);
-        sr.flipX = false;
-        ChangeAnimation(ANIMATION_CAMINAR);
+        if (velocity < 0)
+            sr.flipX = true;
+        if (velocity > 0)
+            sr.flipX = false;
     }
-    public void StopWalkRight()
+
+
+    public void WalkToRight()
     {
-        rb.velocity = new Vector2(0, rb.velocity.y);
-        sr.flipX = false;
-        ChangeAnimation(ANIMATION_CAMINAR);
+        velocity = defaultVelocity;
+        // rb.velocity = new Vector2(velocity, rb.velocity.y);
+        // sr.flipX = false;
+        // ChangeAnimation(ANIMATION_CAMINAR);
     }
+    public void WalkToLeft()
+    {
+        velocity = -defaultVelocity;
+        // rb.velocity = new Vector2(-velocity, rb.velocity.y);
+        // sr.flipX = true;
+        // ChangeAnimation(ANIMATION_CAMINAR);
+    }
+    // public void StopWalkLeft()
+    // {
+    //     velocity = 0;
+    //     // rb.velocity = new Vector2(0, rb.velocity.y);
+    //     // sr.flipX = true;
+    //     // ChangeAnimation(ANIMATION_CAMINAR);
+    // }
+
+    public void StopWalk()
+    {
+        velocity = 0;
+    }
+
+    // public void StopWalkRight()
+    // {
+    //     rb.velocity = new Vector2(0, rb.velocity.y);
+    //     sr.flipX = false;
+    //     ChangeAnimation(ANIMATION_CAMINAR);
+    // }
     public void BestJump()
     {
         if (saltosHechos < limiteSaltos)
@@ -107,17 +99,31 @@ public class SantaController : MonoBehaviour
             rb.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
 
             saltosHechos++;
-            ChangeAnimation(ANIMATION_Saltar);
+            //ChangeAnimation(ANIMATION_Saltar);
         }
 
     }
+      
     public void Disparar()
     {
         //ChangeAnimation(ANIMATION_Shoot);
+        if (sr.flipX == false)
+        {
+            
         var bulletPosition = transform.position + new Vector3(1, 0, 0);
         var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
         var controller = gb.GetComponent<BulletMegamanController>();
         controller.SetRightDirection();
+        }
+        if (sr.flipX == true)
+        {
+           
+        var bulletPosition = transform.position + new Vector3(-1, 0, 0);
+        var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
+        var controller = gb.GetComponent<BulletMegamanController>();
+        controller.SetLeftDirection();
+        }
+        
     }
 
     void OnCollisionEnter2D(Collision2D other)
