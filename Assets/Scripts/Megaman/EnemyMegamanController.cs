@@ -12,7 +12,7 @@ public class EnemyMegamanController : MonoBehaviour
     Animator animator;
   
     const int ANIMATION_CAMINAR = 1;
-     public float vidaEnemigo = 3;
+     public float vidaEnemigo = 2;
 
     private GameManagerController gameManager;
     private Vector3 lastCheckpointPosition;

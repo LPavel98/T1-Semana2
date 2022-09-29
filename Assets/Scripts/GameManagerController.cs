@@ -105,7 +105,7 @@ public class GameManagerController : MonoBehaviour
 
     public void SaveGame()
     {
-        var filePath=Application.persistentDataPath + "/save.dat";
+        var filePath=Application.persistentDataPath + "/save4.dat";
 
         FileStream file;
 
@@ -129,7 +129,7 @@ public class GameManagerController : MonoBehaviour
 
     public void LoadGame()
     {
-        var filePath=Application.persistentDataPath + "/save.dat";
+        var filePath=Application.persistentDataPath + "/save4.dat";
 
         FileStream file;
 
@@ -174,6 +174,6 @@ public class GameManagerController : MonoBehaviour
     }
 
     private void PrintBulletsInScreen(){
-        bulletText.text = "Enemigos: " + bullet;
+        bulletText.text = "Enemigos Eliminados: " + bullet/2;
     }
 }

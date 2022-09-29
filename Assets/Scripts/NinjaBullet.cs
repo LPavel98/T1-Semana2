@@ -56,10 +56,18 @@ public class NinjaBullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other) {
             Destroy(this.gameObject); 
+            // if (other.gameObject.tag == "Enemy")
+            // {
+            //     Destroy(other.gameObject);
+            //     gameManager.PerderBalas(10);
+            //     gameManager.SaveGame();
+            // }
+            //Destroy(this.gameObject); 
             if (other.gameObject.tag == "Enemy")
             {
-                Destroy(other.gameObject);
-                gameManager.PerderBalas(10);
+                other.gameObject.GetComponent<EnemyMegamanController>().Damage(danio);
+                //Destroy(other.gameObject);
+                gameManager.PerderBalas(1);
                 gameManager.SaveGame();
             }
               
