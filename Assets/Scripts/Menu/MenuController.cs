@@ -12,7 +12,13 @@ public class MenuController : MonoBehaviour
     void Start(){
     }
    public void StartGame(){
-    SceneManager.LoadScene(3);
+    SceneManager.LoadScene(0);
+   }
+   public void ScoreGame(){
+    SceneManager.LoadScene(2);
+   }
+   public void BacktoMenu(){
+    SceneManager.LoadScene(1);
    }
    public void ChangeCharacter(){
     srCharacter.sprite = sprites[next];
