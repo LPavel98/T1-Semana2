@@ -22,7 +22,7 @@ public class NinjaButtonController : MonoBehaviour
     public GameObject bullet;
     const int ANIMATION_QUIETO = 0;
     const int ANIMATION_CORRER = 2;
-    //const int ANIMATION_ATACAR = 3;
+    const int ANIMATION_ATACAR = 3;
     const int ANIMATION_Saltar = 4;
     const int ANIMATION_SLIDE = 5;
     const int ANIMATION_DEAD = 6;
@@ -45,6 +45,8 @@ public class NinjaButtonController : MonoBehaviour
     private GameManagerController gameManager;
     AudioSource audioSource;
 
+    private MenuController menuController;
+
     //escalera
 
     void Start()
@@ -54,6 +56,8 @@ public class NinjaButtonController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        menuController = FindObjectOfType<MenuController>();
         
     }
 
@@ -240,7 +244,7 @@ public class NinjaButtonController : MonoBehaviour
     public void Disparar()
     {
         //ChangeAnimation(ANIMATION_Shoot);
-        if (sr.flipX == false)
+        if (sr.flipX == false && menuController.next == 1)
         {
             
         var bulletPosition = transform.position + new Vector3(1, 0, 0);
@@ -249,7 +253,7 @@ public class NinjaButtonController : MonoBehaviour
         controller.SetRightDirection();
         audioSource.PlayOneShot(bulletClip);
         }
-        if (sr.flipX == true)
+        if (sr.flipX == true && menuController.next == 1)
         {
            
         var bulletPosition = transform.position + new Vector3(-2, 0, 0);
@@ -258,6 +262,27 @@ public class NinjaButtonController : MonoBehaviour
         controller.SetLeftDirection();
         audioSource.PlayOneShot(bulletClip);
         }
+
+        if (menuController.next == 0)
+        {
+            ChangeAnimation(ANIMATION_ATACAR);
+        }
+        
+    }
+
+    public void Katana()
+    {
+        
+        //ChangeAnimation(ANIMATION_Shoot);
+        
+            
+        // var bulletPosition = transform.position + new Vector3(1, 0, 0);
+        // var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
+        // var controller = gb.GetComponent<NinjaBullet>();
+        // controller.SetRightDirection();
+        // audioSource.PlayOneShot(bulletClip);
+        ChangeAnimation(ANIMATION_ATACAR);
+        
         
     }
 
@@ -265,10 +290,10 @@ public class NinjaButtonController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other) {
         Debug.Log("Puede saltar");
         puedeSaltar = true;
-            if (other.gameObject.tag == "Enemy")
-            {
-                gameManager.PerderVida();
-            }
+            // if (other.gameObject.tag == "Enemy")
+            // {
+            //     gameManager.PerderVida();
+            // }
 
             if (other.gameObject.name == "DarkHole")
             {
@@ -278,6 +303,13 @@ public class NinjaButtonController : MonoBehaviour
                     transform.position = lastCheckpointPosition;
                 }
                 
+            }
+            if (other.gameObject.tag == "Enemy")
+            {
+                //other.gameObject.GetComponent<EnemyMegamanController>().Damage(danio);
+                Destroy(other.gameObject);
+                gameManager.PerderBalas(1);
+                gameManager.SaveGame();
             }
             
 

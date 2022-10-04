@@ -7,7 +7,7 @@ public class MenuController : MonoBehaviour
 {
     public SpriteRenderer srCharacter;
     public Sprite[] sprites;
-    private int next = 1;
+    public int next = 1;
     // Start is called before the first frame update
     void Start(){
     }
