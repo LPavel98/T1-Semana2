@@ -40,6 +40,7 @@ public class NinjaButtonController : MonoBehaviour
     bool puedeSaltar = true;
     private bool contar = false;
     private bool llaveEstado = false;
+    private bool usoKatana = false;
     private int saltosHechos;
     public int limiteSaltos = 2;
     public float JumpForce = 20;
@@ -47,11 +48,7 @@ public class NinjaButtonController : MonoBehaviour
     private float defaultVelocity = 10;
     private int Saltos;
     private float timer = 0;
-    public int zombiesMuertos=0;
-
-
-
-
+    public int zombiesMuertos = 0;
 
 
     //escalera
@@ -73,16 +70,11 @@ public class NinjaButtonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(zombiesMuertos);
-        
+        Debug.Log(usoKatana);
+
         if (zombiesMuertos == 2)
         {
             SceneManager.LoadScene(3);
-            //Destroy(other.gameObject);
-            //llaveEstado = true;
-            //gameManager.GanarPuntos3(30);
-            //gameManager.SaveGame();
-            //audioSource.PlayOneShot(coinClip);
         }
         
         //colisionoConCheckpoint2=false;
@@ -271,6 +263,7 @@ public class NinjaButtonController : MonoBehaviour
     public void StopWalk()
     {
         velocity = 0;
+        usoKatana = false;
         ChangeAnimation(ANIMATION_QUIETO);
     }
     public void Jump()
@@ -316,6 +309,7 @@ public class NinjaButtonController : MonoBehaviour
 
         if (menuController.next == 0)
         {
+            usoKatana = true;
             ChangeAnimation(ANIMATION_ATACAR);
         }
 
@@ -332,7 +326,9 @@ public class NinjaButtonController : MonoBehaviour
         // var controller = gb.GetComponent<NinjaBullet>();
         // controller.SetRightDirection();
         // audioSource.PlayOneShot(bulletClip);
+        
         ChangeAnimation(ANIMATION_ATACAR);
+       
 
 
     }
@@ -358,13 +354,13 @@ public class NinjaButtonController : MonoBehaviour
             }
 
         }
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy" && usoKatana==true)
         {
-            //other.gameObject.GetComponent<EnemyMegamanController>().Damage(danio);
             Destroy(other.gameObject);
             gameManager.PerderBalas(1);
             gameManager.SaveGame();
         }
+        
 
 
         if (other.collider.tag == "Tilemap")
