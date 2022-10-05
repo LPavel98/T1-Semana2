@@ -186,13 +186,21 @@ public class NinjaButtonController : MonoBehaviour
         //         }
 
         //     }
+        
+        if (gameManager.lives==0)
+                {
+                    rb.velocity = new Vector2(0, rb.velocity.y);
+                    ChangeAnimation(ANIMATION_DEAD);
 
+                }
+        
         //  if (gameManager.livesText.text == "GAME OVER")
         //         {
         //             rb.velocity = new Vector2(0, rb.velocity.y);
         //             ChangeAnimation(ANIMATION_DEAD);
 
         //         }
+        
 
 
 
@@ -340,10 +348,7 @@ public class NinjaButtonController : MonoBehaviour
     {
         Debug.Log("Puede saltar");
         puedeSaltar = true;
-        // if (other.gameObject.tag == "Enemy")
-        // {
-        //     gameManager.PerderVida();
-        // }
+       
 
         if (other.gameObject.name == "DarkHole")
         {
@@ -354,6 +359,13 @@ public class NinjaButtonController : MonoBehaviour
             }
 
         }
+
+        if (other.gameObject.tag == "Enemy")
+        {  
+            gameManager.PerderVida();
+            ChangeAnimation(ANIMATION_glide);
+        }
+
         if (other.gameObject.tag == "Enemy" && usoKatana==true)
         {
             Destroy(other.gameObject);

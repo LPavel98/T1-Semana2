@@ -24,7 +24,7 @@ public class GameManagerController : MonoBehaviour
     private int score;
     private int score2;
     private int score3;
-    private int lives;
+    public int lives;
 
     private int bullet;
 
@@ -94,7 +94,7 @@ public class GameManagerController : MonoBehaviour
     public void PerderVida(){
         lives -= 1;
         PrintLivesInScreen();
-        if (lives == 2)
+        if (lives == 0)
         {
             
             livesText.text = "GAME OVER";
