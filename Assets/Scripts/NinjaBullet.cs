@@ -14,6 +14,8 @@ public class NinjaBullet : MonoBehaviour
     float realVelocity;
     SpriteRenderer sr;
     public int danio = 1;
+    // private int zombisMuertos;
+    // public int cantidadZombisMatar = 1;
     
    
     public void SetRightDirection(){

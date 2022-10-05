@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6853992019581283753, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_Name
-      value: MegamanEnemy
+      value: MegamanEnemy Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6853992019581283753, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
       propertyPath: m_TagString
@@ -85,22 +85,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
---- !u!1 &3972882688298817165 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6853992019581283753, guid: f489d85f6c3be2747a0a53e033c4bcd2, type: 3}
-  m_PrefabInstance: {fileID: 7511096724859435812}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2033615561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3972882688298817165}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b11811886a292634ea95f6c6e1c42736, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocity: 0
-  vidaEnemigo: 3

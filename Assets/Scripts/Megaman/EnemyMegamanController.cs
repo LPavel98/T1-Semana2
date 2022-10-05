@@ -15,15 +15,16 @@ public class EnemyMegamanController : MonoBehaviour
      public float vidaEnemigo = 2;
 
     private GameManagerController gameManager;
+    private NinjaButtonController ninjaButtonController ;
     private Vector3 lastCheckpointPosition;
    
     void Start()
     {
-        Debug.Log("Iniciamos script de player");
         gameManager = FindObjectOfType<GameManagerController>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        ninjaButtonController = FindObjectOfType<NinjaButtonController>();
     }
 
     // Update is called once per frame
@@ -34,6 +35,7 @@ public class EnemyMegamanController : MonoBehaviour
        
         if(vidaEnemigo<=0){
             Destroy(this.gameObject);
+            ninjaButtonController.zombiesMuertos ++;
         }
     }
 

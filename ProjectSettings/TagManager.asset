@@ -18,6 +18,7 @@ TagManager:
   - otraScena
   - limiteDerecho
   - limiteIzquierdo
+  - Llave
   layers:
   - Default
   - TransparentFX
