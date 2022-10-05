@@ -2715,7 +2715,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1925100259}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 439, y: 189, z: -4657.5005}
+  m_LocalPosition: {x: 409, y: 149, z: -4657.5005}
   m_LocalScale: {x: 51.750004, y: 51.750004, z: 51.750004}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2812,7 +2812,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2033615561, guid: 9b93384531535104badb66298c84baae, type: 3}
       propertyPath: vidaEnemigo
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3972882688298817163, guid: 9b93384531535104badb66298c84baae, type: 3}
       propertyPath: m_RootOrder
