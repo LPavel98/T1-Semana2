@@ -251,7 +251,7 @@ public class NinjaButtonController : MonoBehaviour
         var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
         var controller = gb.GetComponent<NinjaBullet>();
         controller.SetRightDirection();
-        controller.SetDanio(2);
+        controller.SetDanio(1);
         audioSource.PlayOneShot(bulletClip);
         }
         if (sr.flipX == true && menuController.next == 1)
@@ -261,7 +261,7 @@ public class NinjaButtonController : MonoBehaviour
         var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
         var controller = gb.GetComponent<NinjaBullet>();
         controller.SetLeftDirection();
-        controller.SetDanio(2);
+        controller.SetDanio(1);
         audioSource.PlayOneShot(bulletClip);
         }
 
