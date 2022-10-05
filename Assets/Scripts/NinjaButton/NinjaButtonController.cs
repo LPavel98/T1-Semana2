@@ -70,7 +70,7 @@ public class NinjaButtonController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(usoKatana);
+        
 
         if (zombiesMuertos == 2)
         {
@@ -81,8 +81,9 @@ public class NinjaButtonController : MonoBehaviour
         //subir escalera
         //Debug.Log("Puede saltar"+puedeSaltar.ToString());
         //puedeSaltar = true;
-        Timer();
+        //Timer();
         
+        Debug.Log(contar);
 
         Movement();
         //CORRER
@@ -191,6 +192,13 @@ public class NinjaButtonController : MonoBehaviour
                 {
                     rb.velocity = new Vector2(0, rb.velocity.y);
                     ChangeAnimation(ANIMATION_DEAD);
+                    contar = true;
+                    Timer();
+                    if (timer>=1)
+                    {
+                        SceneManager.LoadScene(0);
+                    }
+                    
 
                 }
         
