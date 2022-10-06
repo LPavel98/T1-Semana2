@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
 
 public class NinjaButtonController : MonoBehaviour
@@ -10,6 +12,9 @@ public class NinjaButtonController : MonoBehaviour
     public AudioClip bulletClip;
     public AudioClip powerupClip;
     public AudioClip coinClip;
+
+    public Text LlaveText;
+    
 
     public bool ClimbingAllowed { get; set; }
     Rigidbody2D rb;
@@ -50,6 +55,7 @@ public class NinjaButtonController : MonoBehaviour
     private int Saltos;
     private float timer = 0;
     public int zombiesMuertos = 0;
+    public int llavesAgarradas = 0;
 
 
     //escalera
@@ -64,6 +70,7 @@ public class NinjaButtonController : MonoBehaviour
 
         menuController = FindObjectOfType<MenuController>();
         enemyMegamanController = FindObjectOfType<EnemyMegamanController>();
+    
        
 
     }
@@ -73,12 +80,14 @@ public class NinjaButtonController : MonoBehaviour
     {
         
         
+         Debug.Log(llavesAgarradas);
+         LlaveText.text = "Llaves Recogidas: " + llavesAgarradas;
+        // if (zombiesMuertos == 2)
+        // {
+        //     SceneManager.LoadScene(3);
+        // }
         
-        if (zombiesMuertos == 2)
-        {
-            SceneManager.LoadScene(3);
-        }
-        Debug.Log(timer);
+        // Debug.Log(llavesAgarradas);
         //colisionoConCheckpoint2=false;
         //subir escalera
         //Debug.Log("Puede saltar"+puedeSaltar.ToString());
@@ -353,7 +362,6 @@ public class NinjaButtonController : MonoBehaviour
 
 
 
-
     void OnCollisionEnter2D(Collision2D other)
     {
         Debug.Log("Puede saltar");
@@ -463,12 +471,14 @@ public class NinjaButtonController : MonoBehaviour
         {
             Destroy(other.gameObject);
             llaveEstado = true;
+            llavesAgarradas ++;
+            //GanarLlave(1);
             //gameManager.GanarPuntos3(30);
             //gameManager.SaveGame();
             //audioSource.PlayOneShot(coinClip);
         }
         
-        if (other.gameObject.tag == "otraScena" && llaveEstado == true || other.gameObject.tag == "otraScena" && zombiesMuertos == 2)
+        if (other.gameObject.tag == "otraScena" && llavesAgarradas == 2 || other.gameObject.tag == "otraScena" && zombiesMuertos == 2)
         {
             SceneManager.LoadScene(3);
             //Destroy(other.gameObject);
@@ -481,6 +491,7 @@ public class NinjaButtonController : MonoBehaviour
 
 
     }
+ 
 
     private void ChangeAnimation(int animation)
     {
