@@ -23,6 +23,7 @@ public class NinjaButtonController : MonoBehaviour
     private GameManagerController gameManager;
     private MenuController menuController;
     private EnemyMegamanController enemyMegamanController;
+    private NinjaBullet ninjaBullet;
 
     const int ANIMATION_QUIETO = 0;
     const int ANIMATION_CORRER = 2;
@@ -63,7 +64,7 @@ public class NinjaButtonController : MonoBehaviour
 
         menuController = FindObjectOfType<MenuController>();
         enemyMegamanController = FindObjectOfType<EnemyMegamanController>();
-
+       
 
     }
 
@@ -71,19 +72,20 @@ public class NinjaButtonController : MonoBehaviour
     void Update()
     {
         
-
+        
+        
         if (zombiesMuertos == 2)
         {
             SceneManager.LoadScene(3);
         }
-        
+        Debug.Log(timer);
         //colisionoConCheckpoint2=false;
         //subir escalera
         //Debug.Log("Puede saltar"+puedeSaltar.ToString());
         //puedeSaltar = true;
         //Timer();
         
-        Debug.Log(contar);
+        //Debug.Log(contar);
 
         Movement();
         //CORRER
@@ -192,6 +194,7 @@ public class NinjaButtonController : MonoBehaviour
                 {
                     rb.velocity = new Vector2(0, rb.velocity.y);
                     ChangeAnimation(ANIMATION_DEAD);
+                    //SceneManager.LoadScene(0);
                     contar = true;
                     Timer();
                     if (timer>=1)
@@ -206,7 +209,7 @@ public class NinjaButtonController : MonoBehaviour
         //         {
         //             rb.velocity = new Vector2(0, rb.velocity.y);
         //             ChangeAnimation(ANIMATION_DEAD);
-
+        //             SceneManager.LoadScene(0);
         //         }
         
 
@@ -308,7 +311,6 @@ public class NinjaButtonController : MonoBehaviour
             var controller = gb.GetComponent<NinjaBullet>();
             controller.SetRightDirection();
             controller.SetDanio(1);
-            //Debug.Log("Cantidad de zpmbiesss: "+enemyMegamanController.cantidadZombisMatar);
             audioSource.PlayOneShot(bulletClip);
         }
         if (sr.flipX == true && menuController.next == 1)
@@ -331,23 +333,23 @@ public class NinjaButtonController : MonoBehaviour
 
     }
 
-    public void Katana()
-    {
+    // public void Katana()
+    // {
 
-        //ChangeAnimation(ANIMATION_Shoot);
+    //     //ChangeAnimation(ANIMATION_Shoot);
 
 
-        // var bulletPosition = transform.position + new Vector3(1, 0, 0);
-        // var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
-        // var controller = gb.GetComponent<NinjaBullet>();
-        // controller.SetRightDirection();
-        // audioSource.PlayOneShot(bulletClip);
+    //     // var bulletPosition = transform.position + new Vector3(1, 0, 0);
+    //     // var gb = Instantiate(bullet, bulletPosition, Quaternion.identity) as GameObject;
+    //     // var controller = gb.GetComponent<NinjaBullet>();
+    //     // controller.SetRightDirection();
+    //     // audioSource.PlayOneShot(bulletClip);
         
-        ChangeAnimation(ANIMATION_ATACAR);
+    //     ChangeAnimation(ANIMATION_ATACAR);
        
 
 
-    }
+    // }
 
 
 
@@ -368,10 +370,10 @@ public class NinjaButtonController : MonoBehaviour
 
         }
 
-        if (other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy"  && usoKatana==false )
         {  
             gameManager.PerderVida();
-            ChangeAnimation(ANIMATION_glide);
+            //ChangeAnimation(ANIMATION_glide);
         }
 
         if (other.gameObject.tag == "Enemy" && usoKatana==true)
